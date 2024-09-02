@@ -22,15 +22,12 @@ function CostForm(props) {
     event.preventDefault()
 
     const costData = {
-      name: name,
-      summ: summ,
+      costDescription: name,
+      amount: summ,
       date: new Date(date),
     }
 
     props.onSaveCostData(costData)
-    setName("")
-    setSumm("")
-    setDate("")
   }
 
   return (

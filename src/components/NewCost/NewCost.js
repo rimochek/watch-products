@@ -4,9 +4,10 @@ import CostForm from "./CostForm"
 function NewCost(props) {
   const saveCostDataHandler = (inputCostData) => {
     const costData = {
-      ...inputCostData,
       id: Math.random().toString(),
+      ...inputCostData,
     }
+    console.log(costData.id)
     props.onAddCost(costData)
   }
 
