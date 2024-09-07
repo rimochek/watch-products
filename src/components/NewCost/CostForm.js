@@ -6,6 +6,8 @@ function CostForm(props) {
   const [summ, setSumm] = useState("")
   const [date, setDate] = useState("")
 
+  const [show, setShow] = useState(false)
+
   const nameChangeHandler = (event) => {
     setName(event.target.value)
   }
@@ -30,39 +32,54 @@ function CostForm(props) {
     props.onSaveCostData(costData)
   }
 
-  return (
-    <form onSubmit={submitHandler}>
-      <div className="new-cost__controls">
-        <div className="new-cost__control">
-          <label>Name</label>
-          <input type="text" value={name} onChange={nameChangeHandler} />
+  const renderChangeHandler = () => {
+    setShow(!show)
+  }
+
+  if (show) {
+    return (
+      <form onSubmit={submitHandler}>
+        <div className="new-cost__controls">
+          <div className="new-cost__control">
+            <label>Name</label>
+            <input type="text" value={name} onChange={nameChangeHandler} />
+          </div>
+          <div className="new-cost__control">
+            <label>Summ</label>
+            <input
+              type="number"
+              min="0.01"
+              step="0.01"
+              onChange={summChangeHandler}
+              value={summ}
+            />
+          </div>
+          <div className="new-cost__control">
+            <label>Date</label>
+            <input
+              type="date"
+              min="2019-01-01"
+              step="2024-12-31"
+              onChange={dateChangeHandler}
+              value={date}
+            />
+          </div>
+          <div className="new-cost__actions">
+            <button type="submit">Add expenditure</button>
+            <button type="button" onClick={renderChangeHandler}>
+              Cancel
+            </button>
+          </div>
         </div>
-        <div className="new-cost__control">
-          <label>Summ</label>
-          <input
-            type="number"
-            min="0.01"
-            step="0.01"
-            onChange={summChangeHandler}
-            value={summ}
-          />
-        </div>
-        <div className="new-cost__control">
-          <label>Date</label>
-          <input
-            type="date"
-            min="2019-01-01"
-            step="2024-12-31"
-            onChange={dateChangeHandler}
-            value={date}
-          />
-        </div>
-        <div className="new-cost__actions">
-          <button type="submit">Add expenditure</button>
-        </div>
-      </div>
-    </form>
-  )
+      </form>
+    )
+  } else {
+    return (
+      <button type="submit" onClick={renderChangeHandler}>
+        Add expenditure
+      </button>
+    )
+  }
 }
 
 export default CostForm

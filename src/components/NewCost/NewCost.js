@@ -13,6 +13,7 @@ function NewCost(props) {
 
   return (
     <div className="new-cost">
+      {}
       <CostForm onSaveCostData={saveCostDataHandler} />
     </div>
   )
